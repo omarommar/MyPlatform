@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>لوحة الأدمن</title>
+</head>
+<body>
+
+<h1>👑 لوحة الأدمن</h1>
+
+<h2>جميع المستخدمين</h2>
+
+<table border="1" cellpadding="10">
+
+<tr>
+    <th>ID</th>
+    <th>الاسم</th>
+    <th>الإيميل</th>
+    <th>النوع</th>
+    <th>الإجراءات</th>
+</tr>
+
+{% for user in users %}
+
+<tr>
+    <td>{{ user["id"] }}</td>
+    <td>{{ user["username"] }}</td>
+    <td>{{ user["email"] }}</td>
+    <td>{{ user["role"] }}</td>
+
+    <td>
+
+    {% if user["email"] == "omromat7@gmail.com" %}
+
+        👑 الأدمن
+
+    {% elif user["role"] == "student" %}
+
+        <a href="/make-teacher/{{ user['id'] }}">
+            <button>👨‍🏫 جعله مدرس</button>
+        </a>
+
+    {% else %}
+
+        <a href="/make-student/{{ user['id'] }}">
+            <button>🧑‍🎓 جعله طالب</button>
+        </a>
+
+    {% endif %}
+
+    </td>
+
+</tr>
+
+{% endfor %}
+
+</table>
+
+<br>
+
+<a href="/logout">
+<button>تسجيل الخروج</button>
+</a>
+
+</body>
+</html>

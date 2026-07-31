@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>إضافة درس</title>
+</head>
+
+<body>
+
+<h1>إضافة درس جديد</h1>
+
+<form method="POST" enctype="multipart/form-data">
+
+    <p>عنوان الدرس</p>
+    <input type="text" name="title" required>
+
+    <br><br>
+
+    <p>اختر الفيديو</p>
+    <input type="file" name="video" accept="video/*" required>
+
+    <br><br>
+
+    <p>اختر ملف PDF</p>
+    <input type="file" name="pdf" accept=".pdf">
+
+    <br><br>
+
+    <button type="submit">
+        رفع الدرس
+    </button>
+
+</form>
+
+</body>
+
+</html>

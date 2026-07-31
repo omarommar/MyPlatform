@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>الكورسات</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>📚 جميع الكورسات</h1>
+
+    {% if courses %}
+
+        {% for course in courses %}
+
+        <div class="course-card">
+
+            {% if course["image"] %}
+
+            <img
+            src="{{ url_for('static', filename='uploads/course_images/' + course['image']) }}"
+            width="300">
+
+            {% endif %}
+
+            <a href="/course/{{ course['id'] }}">
+                <h2>{{ course["title"] }}</h2>
+            </a>
+
+            <p>{{ course["description"] }}</p>
+
+            <h3>{{ course["price"] }} جنيه</h3>
+
+            <hr>
+
+        </div>
+
+        {% endfor %}
+
+    {% else %}
+
+        <h3>لا توجد كورسات حتى الآن</h3>
+
+    {% endif %}
+
+    <br>
+
+    {% if session["role"] == "teacher" %}
+<a href="/teacher">
+    <button>العودة للوحة المدرس</button>
+</a>
+{% endif %}
+
+{% if session["role"] == "student" %}
+<a href="/student">
+    <button>العودة للوحة الطالب</button>
+</a>
+{% endif %}
+
+</div>
+
+</body>
+</html>

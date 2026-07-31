@@ -1,0 +1,58 @@
+<h1>اختبار عمر 123</h1><!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>اختبار عمر 123</h1>
+
+    <form method="POST">
+
+        <input
+            type="text"
+            name="username"
+            placeholder="اسم المستخدم"
+            required>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="البريد الإلكتروني"
+            required>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="كلمة المرور"
+            required>
+
+        <input
+type="hidden"
+name="role"
+value="student">
+
+        <button type="submit">
+            إنشاء الحساب
+        </button>
+
+    </form>
+
+    <br>
+
+    <a href="/login">
+        تسجيل الدخول
+    </a>
+
+</div>
+
+</body>
+
+</html>

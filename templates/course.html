@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+<meta charset="UTF-8">
+<title>{{ course["title"] }}</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial;
+    background:#f5f5f5;
+}
+
+.header{
+    background:white;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.1);
+}
+
+.container{
+    display:flex;
+    gap:20px;
+    padding:20px;
+}
+
+.sidebar{
+    width:300px;
+    background:white;
+    border-radius:10px;
+    padding:15px;
+}
+
+.content{
+    flex:1;
+    background:white;
+    border-radius:10px;
+    padding:20px;
+}
+
+.lesson{
+    padding:12px;
+    margin-bottom:10px;
+    background:#f0f0f0;
+    border-radius:8px;
+}
+
+.lesson a{
+    text-decoration:none;
+    color:black;
+    font-weight:bold;
+}
+
+video{
+    width:100%;
+    border-radius:10px;
+}
+
+.buy{
+    background:#28a745;
+    color:white;
+    border:none;
+    padding:12px 25px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.pdf{
+    display:inline-block;
+    margin-top:20px;
+    padding:12px 20px;
+    background:#0d6efd;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+
+<h1>{{ course["title"] }}</h1>
+
+<p>{{ course["description"] }}</p>
+
+<h3>{{ course["price"] }} جنيه</h3>
+
+{% if course["image"] %}
+<img
+src="{{ url_for('static', filename='uploads/course_images/' + course['image']) }}"
+width="350">
+{% endif %}
+
+</div>
+<div class="container">
+
+{% if show_lessons %}
+
+<div class="sidebar">
+
+<h2>📚 الدروس</h2>
+
+{% for lesson in lessons %}
+
+<div class="lesson">
+
+<h3>{{ lesson["title"] }}</h3>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="content">
+
+{% if lessons %}
+
+<h2>{{ lessons[0]["title"] }}</h2>
+
+<video controls>
+
+<source src="{{ url_for('static', filename='uploads/videos/' + lessons[0]['video']) }}">
+
+</video>
+
+<br>
+
+{% if lessons[0]["pdf"] %}
+
+<a class="pdf"
+href="{{ url_for('static', filename='uploads/pdfs/' + lessons[0]['pdf']) }}"
+target="_blank">
+
+📄 تحميل ملف PDF
+
+</a>
+
+{% endif %}
+
+{% else %}
+
+<h2>لا توجد دروس حتى الآن.</h2>
+
+{% endif %}
+
+</div>
+
+{% else %}
+
+<div class="content">
+
+<h2>🔒 هذا الكورس مدفوع</h2>
+
+<p>قم بشراء الكورس أولًا حتى تتمكن من مشاهدة الفيديوهات.</p>
+
+<a href="/buy/{{ course['id'] }}">
+<button class="buy">
+💳 اشترِ الآن
+</button>
+</a>
+
+</div>
+
+{% endif %}
+
+</div>
+
+</body>
+</html>
